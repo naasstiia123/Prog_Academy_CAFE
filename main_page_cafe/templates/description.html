@@ -1,0 +1,38 @@
+  <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/about.jpg");'>
+              {% for desc in description %}
+            <a href="{{ desc.video }}" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+              {% endfor %}
+          </div>
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
+            {% for desc in description %}
+            <div class="content">
+              <h3>Опис <strong>Delicious</strong></h3>
+              <p>
+                  {{ desc.description }}
+              </p>
+              <p class="fst-italic">
+                Також маємо такі переваги:
+              </p>
+              <ul>
+                  {% for option in description_options %}
+                <li><i class="bx bx-check-double"></i> {{ option.option }}</li>
+                  {% endfor %}
+              </ul>
+              <p>
+                {{ desc.description1 }}
+              </p>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End About Section -->

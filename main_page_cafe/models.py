@@ -17,15 +17,17 @@ class Description(models.Model, Import_file):
         return super().get_file_name(filename)
 
     description = models.TextField(max_length=300)
+    description1 = models.TextField(max_length=300, blank=True)
     is_visible = models.BooleanField(default=True)
-    video = models.FileField(upload_to=get_file_name)
+    video = models.FileField(upload_to=get_file_name, blank=True)
 
 
 class Description_options(models.Model):
     option = models.CharField(max_length=100)
     position = models.PositiveIntegerField(unique=True)
     is_visible = models.BooleanField(default=True)
-
+    def __str__(self):
+        return f'{self.option}'
 
 class Reasons(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -35,7 +37,7 @@ class Reasons(models.Model):
     is_visible = models.BooleanField(default=True)
 
     def __str__(self):
-        f'{self.name} {self.position}'
+        return f'{self.name} {self.position}'
 
 class DishCategory(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -43,7 +45,10 @@ class DishCategory(models.Model):
     is_visible = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.name}{self.position}'
+        return f'{self.name} {self.position}'
+
+    class Meta:
+        ordering = ('position', )
 
 
 
@@ -67,18 +72,6 @@ class Dish(models.Model, Import_file):
         return f'{self.name} {self.position}'
 
 
-class SpecialDish(models.Model):
-    name = models.ForeignKey(Dish, related_name='dish_name', on_delete=models.CASCADE)
-    position = models.PositiveIntegerField()
-    is_visible = models.BooleanField(default=True)
-    is_special = models.BooleanField(default=True)
-    description = models.TextField(max_length=200, blank=True)
-    ingredients = models.ForeignKey(Dish, related_name='dish_ingredients', on_delete=models.CASCADE)
-    photo = models.ForeignKey(Dish, related_name='dish_photo', on_delete=models.CASCADE)
-
-    def __str__(self):
-        f'{self.name} {self.position}'
-
 
 class Events(models.Model, Import_file):
 
@@ -93,7 +86,7 @@ class Events(models.Model, Import_file):
     photo = models.ImageField(upload_to=get_file_name)
 
     def __str__(self):
-        f'{self.name} {self.position}'
+        return f'{self.name} {self.position}'
 
 class Events_options(models.Model):
 
@@ -101,5 +94,8 @@ class Events_options(models.Model):
     position = models.PositiveIntegerField(unique=True)
     is_visible = models.BooleanField(default=True)
     event_category = models.ForeignKey(Events, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=False)
+
+
 
 

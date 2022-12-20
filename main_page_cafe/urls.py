@@ -1,7 +1,6 @@
-from django.contrib import admin
 from django.urls import path
-import views
+import main_page_cafe.views
 
 urlpatterns = [
-    path('', views.view_main_page),
+    path('', main_page_cafe.views.view_main_page),
 ]
