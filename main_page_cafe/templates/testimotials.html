@@ -1,0 +1,32 @@
+<section id="testimonials" class="testimonials">
+      <div class="container position-relative">
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            {% for item in feedback %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src={{ item.photo.url }} class="testimonial-img" alt="">
+                <h3>{{ item.name}}</h3>
+                <h4>{{ item.position }}r</h4>
+
+
+                <div class="stars">
+                  {{ item.mark }}<i class="bi bi-star-fill"></i>
+                </div>
+
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    {{ item.feedback }}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+              {% endfor %}<!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
