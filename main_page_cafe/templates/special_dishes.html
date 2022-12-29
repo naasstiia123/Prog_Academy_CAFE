@@ -29,14 +29,14 @@
                     {% if forloop.first %}
                        <div class="tab-pane active show" id="tab-{{ dish.pk }}">
                             <div class="row">
-                            <div class="col-lg-8 details order-2 order-lg-1">
-                                <h3>{{ dish.name }}</h3>
-                                <p class="fst-italic">{{ dish.ingredients }}</p>
-                                <p>{{ dish.description }}</p>
-                            </div>
-                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                <img src={{ dish.photo.url }} alt="" class="img-fluid">
-                            </div>
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>{{ dish.name }}</h3>
+                                    <p class="fst-italic">{{ dish.ingredients }}</p>
+                                    <p>{{ dish.description }}</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src={{ dish.photo.url }} alt="" class="img-fluid">
+                                </div>
                             </div>
                         </div>
                     {% else %}
@@ -52,7 +52,6 @@
                                 </div>
                             </div>
                         </div>
-
                     {% endif %}
                 {% endfor %}
             </div>

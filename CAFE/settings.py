@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_page_cafe.apps.MainPageCafeConfig',
+    'account.apps.AccountConfig',
+    'manager.apps.ManagerConfig'
 
 ]
 

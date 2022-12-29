@@ -25,6 +25,7 @@
   <link href="{% static "assets/vendor/glightbox/css/glightbox.min.css" %}"rel="stylesheet">
   <link href="{% static "assets/vendor/swiper/swiper-bundle.min.css" %}"rel="stylesheet">
 
+
   <!-- Template Main CSS File -->
   <link href="{% static "assets/css/style.css" %}"rel="stylesheet">
 
@@ -42,7 +43,7 @@
   <section id="topbar" class="d-flex align-items-center fixed-top topbar-transparent">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
       <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
-      <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Mon-Sat: 11:00 AM - 23:00 PM</span></i>
+      <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Понеділок - Неділя: 10:00  - 23:00 </span></i>
     </div>
   </section>
 
@@ -58,42 +59,42 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-          <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
-          <li><a class="nav-link scrollto" href="#events">Events</a></li>
-          <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
-          <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+          <li><a class="nav-link scrollto active" href="#hero">Дім</a></li>
+          <li><a class="nav-link scrollto" href="#about">Про нас</a></li>
+          <li><a class="nav-link scrollto" href="#menu">Меню</a></li>
+          <li><a class="nav-link scrollto" href="#specials">Спеціальні страви</a></li>
+          <li><a class="nav-link scrollto" href="#events">Заходи</a></li>
+          <li><a class="nav-link scrollto" href="#chefs">Персонал</a></li>
+          <li><a class="nav-link scrollto" href="#gallery">Галерея</a></li>
+
+            {% if 'manager' in user.groups.all.0.name %}
+              <li class="dropdown"><a href="#"><span>Менеджер</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="{% url 'manager:reservations' %}">Резервації</a></li>
+                  <li><a href="{% url 'manager:feedback' %}">Відгуки</a></li>
                 </ul>
               </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            {% endif %}
+            {% if not user.is_active %}
+                <li><a class="nav-link scrollto" href="{% url 'registration' %}">Реєстрація</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'login' %}">Вхід</a></li>
+            {% endif %}
+            {% if user.is_active %}
+                <li><a class="nav-link scrollto" href="{% url 'logout' %}">Вихід</a></li>
+            {% endif %}
+
+          <li><a class="nav-link scrollto" href="#contact">Контакти</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#book-a-table" class="book-a-table-btn scrollto">Book a table</a>
+      <a href="#book-a-table" class="book-a-table-btn scrollto">Зарезервувати столик</a>
 
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
+      <!-- ======= Hero Section ======= -->
+    <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
@@ -102,7 +103,7 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
+          <div class="carousel-item active" style="background-image: url({% static 'assets/img/slide/slide-1.jpg'%});">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown"><span>Delicious</span> Restaurant</h2>
@@ -116,7 +117,7 @@
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
+          <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-2.jpg'%});">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -130,7 +131,7 @@
           </div>
 
           <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
+          <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-3.jpg'%});">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>

@@ -12,7 +12,6 @@ class Import_file:
         filename = f'{uuid.uuid4()}.{ext}'
         return os.path.join('file/dishes', filename)
 
-
 class Description(models.Model, Import_file):
 
     def get_file_name(self, filename: str):
@@ -22,7 +21,6 @@ class Description(models.Model, Import_file):
     description1 = models.TextField(max_length=300, blank=True)
     is_visible = models.BooleanField(default=True)
     video = models.FileField(upload_to=get_file_name, blank=True)
-
 
 class Description_options(models.Model):
     option = models.CharField(max_length=100)
@@ -52,8 +50,6 @@ class DishCategory(models.Model):
     class Meta:
         ordering = ('position', )
 
-
-
 class Dish(models.Model, Import_file):
 
     def get_file_name(self, filename: str):
@@ -72,8 +68,6 @@ class Dish(models.Model, Import_file):
 
     def __str__(self):
         return f'{self.name} {self.position}'
-
-
 
 class Events(models.Model, Import_file):
 
@@ -107,8 +101,6 @@ class Galery(models.Model, Import_file):
     photo = models.ImageField(upload_to=get_file_name)
     is_visible = models.BooleanField(default=True)
     description = models.CharField(max_length=100, blank=True)
-
-
 
 class Chefs(models.Model, Import_file):
     def get_file_name(self, filename: str):
@@ -163,7 +155,6 @@ class Phone_number(models.Model):
     is_visible = models.BooleanField(default=True)
     category = models.ForeignKey(Contacts, on_delete=models.CASCADE)
 
-
 class Contacts_us(models.Model):
 
     name = models.CharField(max_length=50)
@@ -175,8 +166,6 @@ class Contacts_us(models.Model):
 
     manager_date_processed = models.DateTimeField(auto_now=True)
     is_processed = models.BooleanField(default=False)
-
-
 
 class Book_table_F(models.Model):
 
@@ -199,7 +188,6 @@ class Book_table_F(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.phone_num}: {self.description[:20]}'
-
 
 
 
