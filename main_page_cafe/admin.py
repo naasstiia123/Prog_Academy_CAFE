@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import DishCategory, Dish, Description, Description_options, Reasons,  Events, Events_options, Galery, Book_table_F,\
-    Contacts, Address, Email_adress, Phone_number, Testimonials, Chefs, Contacts_us
+    Contacts, Address, Email_adress, Phone_number, Testimonials, Chefs, Contacts_us, Hero
 
 # Register your models here.
 admin.site.register(DishCategory)
@@ -19,4 +19,6 @@ admin.site.register(Email_adress)
 admin.site.register(Phone_number)
 admin.site.register(Testimonials)
 admin.site.register(Contacts_us)
+admin.site.register(Hero)
+
 

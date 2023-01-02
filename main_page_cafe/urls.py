@@ -1,6 +1,8 @@
 from django.urls import path
-import main_page_cafe.views
+from .views import view_main_page
+
 
 urlpatterns = [
-    path('', main_page_cafe.views.view_main_page),
+    path('', view_main_page, name='main_page'),
+
 ]

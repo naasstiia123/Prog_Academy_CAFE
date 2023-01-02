@@ -93,6 +93,9 @@ class Events_options(models.Model):
     event_category = models.ForeignKey(Events, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=False)
 
+    def __str__(self):
+        return f'{self.option} {self.position}'
+
 class Galery(models.Model, Import_file):
 
     def get_file_name(self, filename: str):
@@ -101,6 +104,7 @@ class Galery(models.Model, Import_file):
     photo = models.ImageField(upload_to=get_file_name)
     is_visible = models.BooleanField(default=True)
     description = models.CharField(max_length=100, blank=True)
+
 
 class Chefs(models.Model, Import_file):
     def get_file_name(self, filename: str):
@@ -116,6 +120,9 @@ class Chefs(models.Model, Import_file):
     instagram = models.URLField(max_length=200)
     linkedin = models.URLField(max_length=200)
 
+    def __str__(self):
+        return f'{self.name} {self.position}'
+
 class Testimonials(models.Model, Import_file):
 
     def get_file_name(self, filename: str):
@@ -127,6 +134,9 @@ class Testimonials(models.Model, Import_file):
     feedback = models.TextField(max_length=300)
     mark = models.PositiveSmallIntegerField()
     is_visible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.name} {self.position}'
 
 class Contacts(models.Model):
 
@@ -142,11 +152,17 @@ class Address(models.Model):
     is_visible = models.BooleanField(default=True)
     category = models.ForeignKey(Contacts, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.address}'
+
 class Email_adress(models.Model):
 
     email = models.EmailField()
     is_visible = models.BooleanField(default=True)
     category = models.ForeignKey(Contacts, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.email}'
 
 class Phone_number(models.Model):
 
@@ -154,6 +170,9 @@ class Phone_number(models.Model):
     phone_num = models.CharField(max_length=16, validators=[phone_val])
     is_visible = models.BooleanField(default=True)
     category = models.ForeignKey(Contacts, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.phone_num}'
 
 class Contacts_us(models.Model):
 
@@ -166,6 +185,9 @@ class Contacts_us(models.Model):
 
     manager_date_processed = models.DateTimeField(auto_now=True)
     is_processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.email} {self.subject}'
 
 class Book_table_F(models.Model):
 
@@ -190,4 +212,16 @@ class Book_table_F(models.Model):
         return f'{self.name} {self.phone_num}: {self.description[:20]}'
 
 
+class Hero(models.Model, Import_file):
 
+    def get_file_name(self, filename: str):
+        return super().get_file_name(filename)
+
+    title = models.CharField(max_length=100)
+    desc = models.TextField(max_length=300)
+    position = models.PositiveIntegerField(unique=True)
+    is_visible = models.BooleanField(default=True)
+    photo = models.ImageField(upload_to=get_file_name)
+
+    def __str__(self):
+        return f'{self.title} {self.position}'

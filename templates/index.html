@@ -42,7 +42,7 @@
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-flex align-items-center fixed-top topbar-transparent">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
-      <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
+      <i class="bi bi-phone d-flex align-items-center"><span>+380441112233</span></i>
       <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Понеділок - Неділя: 10:00  - 23:00 </span></i>
     </div>
   </section>
@@ -52,7 +52,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div class="logo me-auto">
-        <h1><a href="index.html">Delicious</a></h1>
+        <h1><a href="{% url 'main_page' %}">Delicious</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -60,12 +60,12 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Дім</a></li>
-          <li><a class="nav-link scrollto" href="#about">Про нас</a></li>
-          <li><a class="nav-link scrollto" href="#menu">Меню</a></li>
-          <li><a class="nav-link scrollto" href="#specials">Спеціальні страви</a></li>
-          <li><a class="nav-link scrollto" href="#events">Заходи</a></li>
-          <li><a class="nav-link scrollto" href="#chefs">Персонал</a></li>
-          <li><a class="nav-link scrollto" href="#gallery">Галерея</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#about">Про нас</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#menu">Меню</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#specials">Спеціальні страви</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#events">Заходи</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#chefs">Персонал</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#gallery">Галерея</a></li>
 
             {% if 'manager' in user.groups.all.0.name %}
               <li class="dropdown"><a href="#"><span>Менеджер</span> <i class="bi bi-chevron-down"></i></a>
@@ -83,17 +83,16 @@
                 <li><a class="nav-link scrollto" href="{% url 'logout' %}">Вихід</a></li>
             {% endif %}
 
-          <li><a class="nav-link scrollto" href="#contact">Контакти</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main_page' %}#contact">Контакти</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#book-a-table" class="book-a-table-btn scrollto">Зарезервувати столик</a>
+      <a href="{% url 'main_page' %}#book-a-table" class="book-a-table-btn scrollto">Зарезервувати столик</a>
 
     </div>
   </header><!-- End Header -->
-
-      <!-- ======= Hero Section ======= -->
+<!-- ======= Hero Section ======= -->
     <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -103,46 +102,20 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url({% static 'assets/img/slide/slide-1.jpg'%});">
+            {% for item in hero %}
+          <div class="carousel-item active" style="background-image: url({{ item.photo.url }});">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown"><span>Delicious</span> Restaurant</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 class="animate__animated animate__fadeInDown"><span>{{ item.title }}</span></h2>
+                <p class="animate__animated animate__fadeInUp">{{ item.desc }}</p>
                 <div>
-                  <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+                  <a href="{% url 'main_page' %}#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Меню</a>
+                  <a href="{% url 'main_page' %}#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Зарезервувати столик</a>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-2.jpg'%});">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <div>
-                  <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url({% static 'assets/img/slide/slide-3.jpg'%});">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <div>
-                  <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
-                </div>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
 
         </div>
 
@@ -157,8 +130,6 @@
       </div>
     </div>
   </section><!-- End Hero -->
-
-
   <main id="main">
     {% block site_content %}
     {% endblock %}
@@ -168,7 +139,7 @@
   <footer id="footer">
     <div class="container">
       <h3>Delicious</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+      <p>Наші сторінки в соціальних мережах</p>
       <div class="social-links">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>

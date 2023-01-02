@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 import random
 from .forms import Book_table_form, Contacts_us_form
 from .models import DishCategory, Dish, Description, Description_options, Reasons,  \
-    Events, Events_options, Galery,  Chefs, Testimonials, Contacts, Address, Phone_number, Email_adress
+    Events, Events_options, Galery,  Chefs, Testimonials, Contacts, Address, Phone_number, Email_adress, Hero
+
 
 # Create your views here.
 def view_main_page(request):
@@ -37,6 +38,8 @@ def view_main_page(request):
     phone = Phone_number.objects.filter(is_visible=True)
     email = Email_adress.objects.filter(is_visible=True)
     form_contact = Contacts_us_form()
+    hero = Hero.objects.filter(is_visible=True)
+    hero = Hero.objects.filter(is_visible=True)
 
 
     return render(request, 'main_page.html', context={
@@ -57,4 +60,11 @@ def view_main_page(request):
         'phone': phone,
         'email': email,
         'form_contact': form_contact,
+        'hero': hero
     })
+
+
+# def view_hero(request):
+#     hero = Hero.objects.filter(is_visible=True)
+#
+#     return render(request, 'index.html', context={'hero': hero})

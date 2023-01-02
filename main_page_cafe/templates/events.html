@@ -23,8 +23,10 @@
                             {{ event.description }}
                         </p>
                         <ul>
-                            {% for option in events_option %}
-                                <li><i class="bi bi-check-circle"></i> {{ option.option }}</li>
+                            {% for item in events_option %}
+                                {% if item.event_category.pk == event.pk %}
+                                <li><i class="bi bi-check-circle"></i> {{ item.option }}</li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                  </div>
